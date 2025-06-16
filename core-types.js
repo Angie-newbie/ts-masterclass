@@ -24,7 +24,7 @@ let person1 = {
     }
 };
 console.log(person1.greet());
-//Union type
+// function printId(id: number | string): void{ //Pipe (|) creates a unio type
 function printId(id) {
     if (typeof id === 'string') { // type guard
         console.log(`your ID is ${id.toUpperCase()}`);
@@ -33,5 +33,57 @@ function printId(id) {
         console.log(`your ID is ${id}`);
     }
 }
+let user1 = {
+    id: 'xds123'
+};
 printId(101);
 printId('abc123');
+let currentDir = 'East';
+// Enumeration
+var LogLevel;
+(function (LogLevel) {
+    LogLevel["DEBUG"] = "Debug";
+    LogLevel["INFO"] = "Info";
+    LogLevel["WARNING"] = "Warning";
+    LogLevel["ERROR"] = "Error"; // 3
+})(LogLevel || (LogLevel = {}));
+let level = LogLevel.INFO;
+console.log(level);
+class Car {
+    // propertirs
+    // public make: string // public: assessible inside or outside the class/instance
+    // private model: string // pricate: accessible only within this class
+    // protected year: number // protected: accessible within this class and subclassess
+    // readonly vin: string // readonly: can only be set in the constructor
+    // constructor(make:string, model: string, year:number, vin: string){
+    //     this.make = make;
+    //     this.model = model;
+    //     this.year = year;
+    //     this.vin = vin;
+    //     console.log(`New car created: ${this.make} ${this.model}`);
+    // }
+    constructor(make, model, year, vin) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.vin = vin;
+        // this.make = make;
+        // this.model = model;
+        // this.year = year;
+        // this.vin = vin;
+        console.log(`New car created: ${this.make} ${this.model}`);
+    }
+    // Methods
+    startEngine() {
+        console.log(`${this.make} ${this.model}(VIN: ${this.vin} ) engine started`);
+    }
+    stopEngine() {
+        console.log(`${this.make} ${this.model} engine stopped`);
+    }
+    getDetails() {
+        return `car: ${this.year} ${this.make} ${this.model}(VIN: ${this.vin})`;
+    }
+}
+let myCar = new Car("Toyota", "CHR", 2012, "sdw123");
+myCar.startEngine();
+console.log(myCar.getDetails());

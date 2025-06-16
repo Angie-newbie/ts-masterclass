@@ -33,7 +33,7 @@ interface Person {
     greet(): string // method signature
 }
 
-let person1: Person ={
+let person1: Person ={ // Object literal as implementation of Person
     id : 1,
     firstName:'Ada',
     lastName:'Lovelace',
@@ -45,8 +45,10 @@ let person1: Person ={
 console.log(person1.greet())
 
 
-//Union type
-function printId(id: number | string): void{ //Pipe (|) creates a unio type
+//Union type'
+type UserId = number | string
+// function printId(id: number | string): void{ //Pipe (|) creates a unio type
+function printId(id:UserId): void{
     if (typeof id === 'string'){ // type guard
         console.log(`your ID is ${id.toUpperCase()}`)
     } else {
@@ -54,7 +56,78 @@ function printId(id: number | string): void{ //Pipe (|) creates a unio type
     }
     
 }
+interface User{
+    id: UserId
+}
+
+let user1: User= {
+    id: 'xds123'
+}
 
 printId(101)
 
 printId('abc123')
+
+// literal type
+type Direction = 'North' | 'South' | 'West' | 'East'
+let currentDir: Direction = 'East'
+
+// Enumeration
+enum LogLevel {
+    DEBUG = 'Debug', // 0
+    INFO = 'Info', // 1
+    WARNING = 'Warning', // 2
+    ERROR = 'Error' // 3
+}
+
+let level: LogLevel = LogLevel.INFO
+console.log(level)
+
+// Classes
+interface Vehicle {
+    startEngine(): void
+    stopEngine(): void
+    getDetails(): string
+}
+
+class Car implements Vehicle {
+    // propertirs
+    // public make: string // public: assessible inside or outside the class/instance
+    // private model: string // pricate: accessible only within this class
+    // protected year: number // protected: accessible within this class and subclassess
+    // readonly vin: string // readonly: can only be set in the constructor
+
+    // constructor(make:string, model: string, year:number, vin: string){
+    //     this.make = make;
+    //     this.model = model;
+    //     this.year = year;
+    //     this.vin = vin;
+    //     console.log(`New car created: ${this.make} ${this.model}`);
+    // }
+
+    constructor(public make:string, public model: string, protected year:number, readonly vin: string){
+        // this.make = make;
+        // this.model = model;
+        // this.year = year;
+        // this.vin = vin;
+        console.log(`New car created: ${this.make} ${this.model}`);
+    }
+
+    // Methods
+    public startEngine(): void {
+        console.log(`${this.make} ${this.model}(VIN: ${this.vin} ) engine started`);
+    }
+
+    public stopEngine(): void {
+        console.log(`${this.make} ${this.model} engine stopped`);
+        
+    }
+
+    public getDetails(): string {
+        return `car: ${this.year} ${this.make} ${this.model}(VIN: ${this.vin})`;
+    }
+}
+
+let myCar = new Car("Toyota", "CHR", 2012, "sdw123")
+myCar.startEngine();
+console.log(myCar.getDetails())
